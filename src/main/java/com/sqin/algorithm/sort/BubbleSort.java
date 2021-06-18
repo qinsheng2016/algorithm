@@ -2,7 +2,7 @@ package com.sqin.algorithm.sort;
 
 /*
  * @Author Sheng Qin
- * @Description
+ * @Description 冒泡排序
  * @Date 0:18 2021/6/18
  **/
 public class BubbleSort {

@@ -2,7 +2,7 @@ package com.sqin.algorithm.sort;
 
 /*
  * @Author Sheng Qin
- * @Description
+ * @Description 选择排序
  * @Date 22:19 2021/6/17
  **/
 public class SelectionSort {
