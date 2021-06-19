@@ -1,5 +1,7 @@
 package com.sqin.algorithm.eor;
 
+import com.sqin.algorithm.util.AlgorithmUtil;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,7 +19,8 @@ public class KM {
         for (int i = 0; i < arr.length; i++) {
             // 将i数字，换成32位的，分别与32个位置上的1进行与运算，如果结果是1，说明这个位置上的数字为1，在t[]的这个位置上+1
             // arr[i]: 00000000000101010011010101100101
-            // a :     00000000000000000000000000000001
+            // a@1 :   00000000000000000000000000000001
+            // a@2 :   00000000000000000000000000000010
             // 进行与运算，如果
             for (int j = 0; j < 32; j++) {
                 if ((arr[i] & (a << j)) == (a << j)) {
@@ -66,6 +69,11 @@ public class KM {
                 arr[index++] = mTimesNum;
             }
         }
+        // 打乱数组中的元素顺序
+        for (int i = 0; i < arr.length; i++) {
+            int j = (int) (Math.random() * (arr.length));
+            AlgorithmUtil.swap(arr, i, j);
+        }
         return arr;
     }
 
@@ -73,16 +81,10 @@ public class KM {
         return ((int) (Math.random() * range) + 1) - ((int) (Math.random() * range) + 1);
     }
 
-    public static void printArr(int arr[]) {
-        for (int num : arr) {
-            System.out.print(num + " ");
-        }
-    }
-
     public static void main(String[] args) {
 
         System.out.println("Start");
-        for(int i=0; i< 100000; i++) {
+        for (int i = 0; i < 100000; i++) {
             int a = (int) (Math.random() * 9) + 1; // a 是1-9
             int b = (int) (Math.random() * 9) + 1; // b 是1-9
             int k = Math.min(a, b);
@@ -93,7 +95,7 @@ public class KM {
             int arr[] = generateRandomArray(k, m);
             int ans = onlyKTimes(arr, k, m);
             int ans2 = test(arr, k, m);
-            if(ans != ans2) {
+            if (ans != ans2) {
                 System.out.println("Error");
             }
         }
