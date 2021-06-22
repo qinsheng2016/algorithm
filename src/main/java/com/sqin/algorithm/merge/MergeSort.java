@@ -61,4 +61,37 @@ public class MergeSort {
             arr[L + i] = help[i];
         }
     }
+
+    /**
+     * 归并排序，使用迭代的方式
+     *
+     * @param arr
+     */
+    public static void mergeSort2(int arr[]) {
+        if (arr == null || arr.length < 2) {
+            return;
+        }
+        int mergeSize = 1;
+        int N = arr.length;
+        while (mergeSize < N) {
+            int L = 0;
+            while (L < N) {
+                int M = mergeSize + L - 1;
+                // 左组已经不够了，增加步长进行下一步。
+                if (M >= N) {
+                    break;
+                }
+                // 右组不够，R = N - 1, 右组够，R = mergeSize + M
+                int R = Math.min(mergeSize + M, N - 1);
+                merge(arr, L, M, R);
+                L = R + 1;
+            }
+
+            // 防溢出，防止mergeSize超过整数最大值的一半
+            if (mergeSize > N / 2) {
+                break;
+            }
+            mergeSize <<= 1;
+        }
+    }
 }
